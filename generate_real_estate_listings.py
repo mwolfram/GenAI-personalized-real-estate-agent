@@ -52,15 +52,15 @@ def initial_generation():
 def individual_augmentation():
     individual_augmentation_prompt = """
     ===RAW LISTING===
-    Neighborhood: Riverfront District
+    Neighborhood: Harbor View
     Price: $1,200,000
     Bedrooms: 4
     Bathrooms: 3.5
     House Size: 3,500 sqft
 
-    Description: Live in luxury in this 4-bedroom, 3.5-bathroom home located in the coveted Riverfront District. This property features a chef's kitchen with high-end appliances, a spacious master suite with a private balcony overlooking the river, and a backyard with a fire pit and outdoor kitchen. With stunning views and access to the nearby riverfront trail, this home is perfect for outdoor enthusiasts.
+    Description: This waterfront property in Harbor View offers breathtaking views of the bay and luxurious coastal living. The 4-bedroom, 3.5-bathroom home features an open-concept floor plan, high-end finishes, and a private dock for boating enthusiasts. Relax on the expansive deck overlooking the water or entertain guests in the spacious living areas. Live the coastal lifestyle in Harbor View.
 
-    Neighborhood Description: The Riverfront District is known for its waterfront properties, upscale dining options, and vibrant arts scene. Residents can enjoy a morning paddle on the river or take a short walk to the Riverfront Plaza for shopping and entertainment. With easy access to public transportation and cultural attractions, this neighborhood offers the perfect blend of urban living and natural beauty.
+    Neighborhood Description: Harbor View is a sought-after waterfront community with marinas, yacht clubs, and waterfront restaurants. Residents can enjoy outdoor activities like sailing, fishing, and kayaking, as well as easy access to the beach and coastal trails for recreation.
     ===END RAW LISTING===
 
     Look at the raw listing and enhance it, at random, with some of the following features:
