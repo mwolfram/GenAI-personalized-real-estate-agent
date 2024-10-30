@@ -3,6 +3,9 @@
 
 from toolkit import single_query_llm
 
+'''
+Generates 10 random, imaginary real estate listings that look similar to the one provided.
+'''
 def initial_generation():
     initial_generation_prompt = """
     Generate 10 random, imaginary real estate listings that look similar to this:
@@ -49,6 +52,9 @@ def initial_generation():
     print(response)
 
 
+'''
+Used to individually enhance listing, one by one, with some of the ideas mentioned in the prompt.
+'''
 def individual_augmentation():
     individual_augmentation_prompt = """
     ===RAW LISTING===
@@ -95,5 +101,5 @@ def individual_augmentation():
     print("\n\nThe Response is:")
     print(response)
 
-
+#initial_generation()
 individual_augmentation()
