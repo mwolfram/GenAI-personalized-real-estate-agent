@@ -14,7 +14,7 @@ os.environ["OPENAI_API_KEY"] = "<voacareum_openai_api_key>"
 os.environ["OPENAI_API_BASE"] = "https://openai.vocareum.com/v1"
 
 MODEL_NAME = "gpt-3.5-turbo"
-TEMPERATURE = 0.4
+TEMPERATURE = 0.0
 MAX_TOKENS = 1000
 
 '''
@@ -51,7 +51,7 @@ def query_real_estate_agent(questions, answers, query, vector_db):
 
     # Use the LLM to get a comprehensible string of user preferences based on the questions and answers
     preferences = single_query_llm("""
-        Take these questions and answers and reformat them into a short text that describes the user's preferences.
+        Take these questions and answers and reformat them into a short text that describes the user's preferences. Try not to include text from the questions (Q:), but rather focus on the answers (A:).
         {questions_and_answers}                 
     """.format(questions_and_answers=questions_and_answers))
 
@@ -59,13 +59,13 @@ def query_real_estate_agent(questions, answers, query, vector_db):
 
     # Use the vector database to find similar documents based on the user's preferences
     similar_docs = vector_db.search_based_on_preferences(preferences)
-    print(similar_docs)
+    #print(similar_docs)
 
     # Generate a prompt for the real estate agent
     prompt = get_interpolated_prompt(
         input_documents=similar_docs, 
         query=query, 
-        questions_and_answers=questions_and_answers)
+        preferences=preferences)
     
     # Query the real estate agent with the prompt
     return single_query_llm(prompt)
@@ -87,6 +87,25 @@ def split_listings(listings: str):
     return listings
 
 if __name__ == "__main__":
-    listings = read_listings()
-    listings = split_listings(listings)
-    print(listings)
+    #listings = read_listings()
+    #listings = split_listings(listings)
+    #print(listings)
+
+    questions = [   
+                "How big do you want your house to be?",
+                "What are 3 most important things for you in choosing this property?", 
+                "Do you require a home office?", 
+                "Which transportation options are important to you?",
+                "Which entertainment options are important to you?",
+            ]
+
+    answers = [
+        "At least 2,200 sqft",
+        "Access to a pool, top-rated schools and grocery stores",
+        "Yes, definitely, I'd like to work from home",
+        "Easy access to an airport is a must",
+        "Nothing special, a friendly and safe community is enough for me"
+    ]
+
+    qastring = qa_to_string(questions, answers)
+    print(qastring)

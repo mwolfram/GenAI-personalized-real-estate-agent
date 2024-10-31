@@ -9,23 +9,24 @@ Generates a prompt template for the AI Real Estate Agent to follow when interact
 def get_prompt_template() -> PromptTemplate:
     prompt = PromptTemplate(
         template="""
-        The following is a friendly conversation between a human and an AI Real Estate Agent. 
+        The following is a friendly conversation between a human and an AI. 
         The AI follows human instructions and provides real estate recommendations for a human based on
-        the available real estate listings and the human-provided personal questions and answers, which
-        reflect the human's preferences and focus areas. The AI Real Estate Agent will reformulate the 
-        provided real estate listings to match the human's preferences and focus areas in order to increase
-        the appeal for the real estate listing, but will NOT alter any factual information.
+        the provided real estate listings and the human-provided personal personal preferences.
+        The AI will first and foremost focus on the human's personal preferences and will provide real estate listings
+        that reflect these preferences in order to increase their appeal. The AI shall be creative and add to the listing, 
+        sticking to the original format, but it is paramount that the AI does NOT alter any factual information 
+        in the real estate listings.
         
         Relevant Real Estate Listings: 
         {input_documents}
 
-        Personal Questions and Answers:
-        {questions_and_answers}
+        Personal Preferences:
+        {preferences}
 
         Human: {query}
 
         AI:""",
-        input_variables=["input_documents", "query", "questions_and_answers"],
+        input_variables=["input_documents", "query", "preferences"],
     )
 
     return prompt
@@ -33,9 +34,9 @@ def get_prompt_template() -> PromptTemplate:
 '''
 Generates a prompt template and also interpolates the necessary variables
 '''
-def get_interpolated_prompt(input_documents: str, query: str, questions_and_answers: str) -> str:
+def get_interpolated_prompt(input_documents: str, query: str, preferences: str) -> str:
     prompt = get_prompt_template()
-    return prompt.format(input_documents=input_documents, query=query, questions_and_answers=questions_and_answers)
+    return prompt.format(input_documents=input_documents, query=query, preferences=preferences)
 
 if __name__ == "__main__":
     input_documents = "none"
